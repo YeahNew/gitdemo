@@ -158,7 +158,7 @@ if __name__ == '__main__':
         .load(Edage_data_PATH) \
         .toDF(*schema2) \
 
-    Node_features_MLdataset = create_ml_dataset_from_spark(Node_features_data.T, 3, 1024)  ##1097.3MB
+    Node_features_MLdataset = create_ml_dataset_from_spark(Node_features_data, 3, 1024)  ##1097.3MB
     Edage_MLdataset = create_ml_dataset_from_spark(Edage_data, 3, 1024)  ##908.3MB
 
     # print("Edage_MLdataset的每列数据类型：：：\n",Edage_data.dtypes)
@@ -301,13 +301,11 @@ if __name__ == '__main__':
             node_feature_data = fetch_func(Node_features_MLdataset,node_num,False)
             #edge_data_data = fetch_func(edge_data_shard,True)
 
-            print("@@@@@@@@@@@:::",len(node_feature_data))
+            print("len(node_feature_data):",len(node_feature_data))
 
-            print("&&&&&&&&&&&&&&&&&&&&&::\n",node_feature_data[0])
-            print("&&&&&&&&%node_feature_data len::\n", len(node_feature_data))
+            print("node_feature_data[0]:\n",node_feature_data[0])
 
             print("node_feature_data type::",type(node_feature_data))
-            print("@@@@@@@@@@@:::", len(node_feature_data))  ##3 因为之前就是切片为3
 
             ##-------------
 
@@ -473,6 +471,3 @@ if __name__ == '__main__':
         negative_slope=args.negative_slope,
         sampling_num_workers=args.sampling_num_workers,
         num_cpus_per_worker=args.num_cpus_per_worker)
-
-
-#spark.conf.set("spark.sql.session.timeZone", "UTC")
